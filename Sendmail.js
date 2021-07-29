@@ -11,7 +11,7 @@ map.put('mail.smtp.ssl.trust', 'smtp.naver.com');
 
 function Sendmail(email, subject, text, send_html) {
     try {
-        let authen = new javax.mail.Authenticator() {
+        const authen = new javax.mail.Authenticator() {
             getPasswordAuthentication() {
                 return new PasswordAuthentication(user, pw);
             }
@@ -24,7 +24,7 @@ function Sendmail(email, subject, text, send_html) {
         if (send_html) msg.setContent(text, 'text/html');
         else msg.setText(text);
         Transport.send(msg);
-        return 'E-mail: ' + email.split('@')[0] + '\nDomain: '+ email.split("@")[1] + '\nType: ' + (send_html ? 'HTML' : 'Plain Text') + '\nSubject: ' + subject + '\nMessage: ' + text.slice(0, text.length * 2 / 7 | 0) + '....';
+        return 'E-mail: ' + email.split('@')[0] + '\nDomain: '+ email.split("@")[1] + '\nType: ' + (send_html ? 'HTML' : 'Plain Text') + '\nSubject: ' + subject + '\nMessage: ' + text;
     } catch (e) {
         return JSON.stringify(e, null, 4);
     }
