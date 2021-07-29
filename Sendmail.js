@@ -1,6 +1,6 @@
 importPackage(javax.mail, javax.mail.internet);
 
-let map = new java.util.Properties(),
+const map = new java.util.Properties(),
 user = 'NAVER_E-MAIL',
 pw = 'NAVER_PASSWORD';
 map.put('mail.smtp.host', 'smtp.naver.com');
@@ -24,7 +24,7 @@ function Sendmail(email, subject, text, send_html) {
         if (send_html) msg.setContent(text, 'text/html');
         else msg.setText(text);
         Transport.send(msg);
-        return 'E-mail: ' + email.split('@')[0] + '\nDomain: '+ email.split("@")[1] + '\nType: ' + (send_html ? 'HTML' : 'Plain Text') + '\nSubject: ' + subject + '\nMessage: ' + text.slice(0, 10) + '....';
+        return 'E-mail: ' + email.split('@')[0] + '\nDomain: '+ email.split("@")[1] + '\nType: ' + (send_html ? 'HTML' : 'Plain Text') + '\nSubject: ' + subject + '\nMessage: ' + text.slice(0, text.length * 2 / 7 | 0) + '....';
     } catch (e) {
         return JSON.stringify(e, null, 4);
     }
